@@ -10,10 +10,10 @@ import { BtnColors } from '../types/Button'
       <h1>Seja Bem Vindo!</h1>
       <div class="buttons">
         <div>
-          <DefaultBtn text="Criar Ficha" />
+          <DefaultBtn text="Criar Ficha" @clicked="console.log('Criar Ficha')" />
         </div>
         <div>
-          <DefaultBtn text="Carregar Ficha" />
+          <DefaultBtn text="Carregar Ficha" @clicked="console.log('Carregar Ficha')" />
         </div>
       </div>
     </section>

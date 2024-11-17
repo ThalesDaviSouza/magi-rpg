@@ -25,6 +25,10 @@ import {
     }     
     from '../types/Button';
 
+const emit = defineEmits<{
+  (e: 'clicked'): void
+}>();    
+    
 const props = defineProps<ButtonInterface>();
 
 const backgroundColor = ref(props.backgroundColor ? props.backgroundColor : DEFAULT_BUTTON_BACKGROUND);
@@ -40,6 +44,8 @@ const clicked = (a:PointerEvent) => {
     setInterval(() => {
         isFiltered.value = false;
     }, 230);
+
+    emit("clicked");
 }
 
 </script>
