@@ -1,6 +1,13 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import DefaultBtn from '../components/DefaultBtn.vue'
 import { BtnColors } from '../types/Button'
+
+const router = useRouter();
+
+const createSheet = () => {
+  router.push({name: 'create'})
+}
 
 </script>
 
@@ -10,7 +17,7 @@ import { BtnColors } from '../types/Button'
       <h1>Seja Bem Vindo!</h1>
       <div class="buttons">
         <div>
-          <DefaultBtn text="Criar Ficha" @clicked="console.log('Criar Ficha')" />
+          <DefaultBtn text="Criar Ficha" @clicked="createSheet" />
         </div>
         <div>
           <DefaultBtn text="Carregar Ficha" @clicked="console.log('Carregar Ficha')" />
