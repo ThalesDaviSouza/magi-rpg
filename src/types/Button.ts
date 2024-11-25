@@ -3,7 +3,8 @@ export interface ButtonInterface{
     backgroundColor?: BtnColors,
     backgroundHoverColor?: BtnColors,
     fontColor?: string,
-    hoverFontColor?: string
+    hoverFontColor?: string,
+    isActive?: boolean
 }
 
 export enum BtnColors {

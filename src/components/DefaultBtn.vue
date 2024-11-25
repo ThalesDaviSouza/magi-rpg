@@ -31,10 +31,43 @@ const emit = defineEmits<{
     
 const props = defineProps<ButtonInterface>();
 
-const backgroundColor = ref(props.backgroundColor ? props.backgroundColor : DEFAULT_BUTTON_BACKGROUND);
-const backgroundHoverColor = ref(props.backgroundHoverColor ? props.backgroundHoverColor : DEFAULT_BUTTON_HOVER_BACKGROUND );
-const fontColor = ref(props.fontColor ? props.fontColor : DEFAULT_BUTTON_FONT );
-const fontHoverColor = ref(props.hoverFontColor ? props.hoverFontColor : DEFAULT_BUTTON_HOVER_FONT );
+let backgroundColorValue = props.backgroundColor;
+if(!props.backgroundColor && !props.isActive){
+    backgroundColorValue = DEFAULT_BUTTON_BACKGROUND;
+}
+else if(!props.backgroundColor){
+    backgroundColorValue = DEFAULT_BUTTON_HOVER_BACKGROUND;
+}
+
+let backgroundHoverColorValue = props.backgroundHoverColor;
+if(!props.backgroundHoverColor && !props.isActive){
+    backgroundHoverColorValue = DEFAULT_BUTTON_HOVER_BACKGROUND;
+}
+else if(!props.backgroundHoverColor){
+    backgroundHoverColorValue = DEFAULT_BUTTON_BACKGROUND;
+}
+
+let fontColorValue = props.fontColor;
+if(!props.fontColor && !props.isActive){
+    fontColorValue = DEFAULT_BUTTON_FONT;
+}
+else if(!props.fontColor){
+    fontColorValue = DEFAULT_BUTTON_HOVER_FONT;
+}
+
+let fontHoverColorValue = props.hoverFontColor;
+if(!props.hoverFontColor && !props.isActive){
+    fontHoverColorValue = DEFAULT_BUTTON_HOVER_FONT;
+}
+else if(!props.hoverFontColor){
+    fontHoverColorValue = DEFAULT_BUTTON_FONT;
+}
+
+const backgroundColor = ref(backgroundColorValue);
+const backgroundHoverColor = ref(backgroundHoverColorValue);
+
+const fontColor = ref(fontColorValue);
+const fontHoverColor = ref(fontHoverColorValue);
 
 const isFiltered = ref(false);
 

@@ -4,7 +4,9 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <RouterView />
+  <main>
+    <RouterView />
+  </main>
   <footer>
     <router-link href="https://docs.google.com/document/d/1kM41livHqtgm2o02FBfj41WW6i58Ba-YR7snCijhHBk/edit?usp=sharing" 
                 target="_blank" 
@@ -20,6 +22,14 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <style scoped>
+  main{
+    min-height: 90vh;
+    display: flex;
+  }
+  main section{
+    width: 100%;
+  }
+
   footer{
     position: relative;
     left: 0;

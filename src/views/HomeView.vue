@@ -12,37 +12,28 @@ const createSheet = () => {
 </script>
 
 <template>
-  <main>
-    <section>
-      <h1>Seja Bem Vindo!</h1>
-      <div class="buttons">
-        <div>
-          <DefaultBtn text="Criar Ficha" @clicked="createSheet" />
-        </div>
-        <div>
-          <DefaultBtn text="Carregar Ficha" @clicked="console.log('Carregar Ficha')" />
-        </div>
+  <section>
+    <h1>Seja Bem Vindo!</h1>
+    <div class="buttons">
+      <div>
+        <DefaultBtn text="Criar Ficha" @clicked="createSheet" />
       </div>
-    </section>
+      <div>
+        <DefaultBtn text="Carregar Ficha" @clicked="console.log('Carregar Ficha')" />
+      </div>
+    </div>
+  </section>
 
-  </main>
 </template>
 
 <style scoped>
-  main{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 90vh;
-    width: 100vw;
-  }
   section{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width:75%;
-    height: 75%;
+    width: 100%;
+    padding-bottom: 120px;
   }
 
   h1{
