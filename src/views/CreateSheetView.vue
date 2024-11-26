@@ -26,21 +26,37 @@
     actualStage.value = stage;
   }
 
+  const nextStage = () => {
+    actualStage.value++;
+  }
+
+  const previousStage = () => {
+    actualStage.value--;
+  }
+
   const isAttributesActive = computed(() => {
     return actualStage.value >= stages.attributes;
-  })
+  });
 
   const isPhonemaActive = computed(() => {
     return actualStage.value >= stages.phenomena;
-  })
+  });
 
   const isAffinityActive = computed(() => {
     return actualStage.value >= stages.affinity;
-  })
+  });
 
   const isBioActive = computed(() => {
     return actualStage.value >= stages.bio;
-  })
+  });
+
+  const canGoBack = computed(() => {
+    return actualStage.value != stages.attributes;
+  });
+
+  const canGoAhead = computed(() => {
+    return actualStage.value != stages.bio;
+  });
 
 </script>
 
@@ -81,6 +97,29 @@
     <div v-show="actualStage == stages.phenomena">phenomena</div>
     <div v-show="actualStage == stages.affinity">affinity</div>
     <div v-show="actualStage == stages.bio">Bio</div>
+    
+    <div class="navigation">
+      <div class="navigation_btn">
+        <DefaultBtn text="Anterior" @clicked="previousStage" 
+        :isActive="canGoBack"
+        :key="canGoBack"
+        />
+      </div>
+      <div class="navigation_btn">
+        <DefaultBtn text="Próximo" @clicked="nextStage" 
+        v-show="canGoAhead"
+        :isActive="canGoAhead"
+        :key="canGoAhead"
+        />
+
+        <DefaultBtn text="Finalizar" @clicked="console.log('terminar')" 
+        v-show="!canGoAhead"
+        :isActive="!canGoAhead"
+        :key="canGoAhead"
+        />
+      </div>
+      
+    </div>
   </section>
 </template>
 
@@ -100,7 +139,7 @@
     width: 60px;
     border-radius: 0;
 
-    transition: all 0.5s;
+    transition: all 0.32s;
   }
   nav .bar.active{
     background-color: var(--font-color);
@@ -114,5 +153,19 @@
   }
   nav .stage.active {
     background: var(--font-color);
+  }
+
+  .navigation{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .navigation_btn{
+    font-size: 24px;
+    width: 240px;
+    height: 44px;
+    margin: 5px 20px 25px 20px;
   }
 </style>
