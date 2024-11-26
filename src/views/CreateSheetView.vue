@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { computed, ref } from "vue";
   import DefaultBtn from '../components/DefaultBtn.vue'
+  import AttributesForm from '../components/createSheet/AttributesForm.vue'
   import { 
         BtnColors, 
         BtnFontColors,
@@ -74,7 +75,9 @@
         />
       </div>
     </nav>
-    <div v-show="actualStage == stages.attributes">Attributes</div>
+    <div v-show="actualStage == stages.attributes">
+      <AttributesForm />
+    </div>
     <div v-show="actualStage == stages.phenomena">phenomena</div>
     <div v-show="actualStage == stages.affinity">affinity</div>
     <div v-show="actualStage == stages.bio">Bio</div>
