@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref } from "vue";
+  import { computed, ref } from "vue";
   import DefaultBtn from '../components/DefaultBtn.vue'
   import { 
         BtnColors, 
@@ -8,21 +8,38 @@
     from '../types/Button';
   
   enum stages{
-    atributes = 1,
+    attributes = 1,
     phenomena,
     affinity,
     bio
   };
   
-  console.log(stages.atributes)
-
-
-  const actualValueStage = ref(stages.atributes);
+  const actualStage = ref(stages.attributes);
 
 
   const isActive = (stage:stages):boolean => {
-    return actualValueStage.value >= stage;
+    return actualStage.value >= stage;
   }
+
+  const jumpToStage = (stage:stages):void => {
+    actualStage.value = stage;
+  }
+
+  const isAttributesActive = computed(() => {
+    return actualStage.value >= stages.attributes;
+  })
+
+  const isPhonemaActive = computed(() => {
+    return actualStage.value >= stages.phenomena;
+  })
+
+  const isAffinityActive = computed(() => {
+    return actualStage.value >= stages.affinity;
+  })
+
+  const isBioActive = computed(() => {
+    return actualStage.value >= stages.bio;
+  })
 
 </script>
 
@@ -30,29 +47,37 @@
   <section>
     <nav>
       <div class="stage">
-        <DefaultBtn text="Atributos" @clicked="console.log('Atributos')" 
-          :isActive="isActive(stages.atributes)"
+        <DefaultBtn text="Atributos" @clicked="jumpToStage(stages.attributes)" 
+          :isActive="isAttributesActive"
+          :key="isAttributesActive"
         />
       </div>
-      <div class="bar"></div>
+      <div class="bar" :class="{active: isPhonemaActive}"></div>
       <div class="stage">
-        <DefaultBtn text="Fenômenos" @clicked="console.log('Fenômenos')" 
-          :isActive="isActive(stages.phenomena)"
+        <DefaultBtn text="Fenômenos" @clicked="jumpToStage(stages.phenomena)" 
+        :isActive="isPhonemaActive"
+        :key="isPhonemaActive"
         />
       </div>
-      <div class="bar"></div>
+      <div class="bar" :class="{active: isAffinityActive}"></div>
       <div class="stage">
-        <DefaultBtn text="Afinidade Elemental" @clicked="console.log('Afinidade Elemental')" 
-          :isActive="isActive(stages.affinity)"
+        <DefaultBtn text="Afinidade Elemental" @clicked="jumpToStage(stages.affinity)" 
+          :isActive="isAffinityActive"
+          :key="isAffinityActive"
         />
       </div>
-      <div class="bar"></div>
+      <div class="bar" :class="{active: isBioActive}"></div>
       <div class="stage">
-        <DefaultBtn text="Bio" @clicked="console.log('Bio')" 
-          :isActive="isActive(stages.bio)"
+        <DefaultBtn text="Bio" @clicked="jumpToStage(stages.bio)" 
+          :isActive="isBioActive"
+          :key="isBioActive"
         />
       </div>
     </nav>
+    <div v-show="actualStage == stages.attributes">Attributes</div>
+    <div v-show="actualStage == stages.phenomena">phenomena</div>
+    <div v-show="actualStage == stages.affinity">affinity</div>
+    <div v-show="actualStage == stages.bio">Bio</div>
   </section>
 </template>
 
@@ -71,6 +96,11 @@
     padding: 4px;
     width: 60px;
     border-radius: 0;
+
+    transition: all 0.5s;
+  }
+  nav .bar.active{
+    background-color: var(--font-color);
   }
   nav .stage{
     font-size: 20px;
